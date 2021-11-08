@@ -1,60 +1,39 @@
-#calculator {
-    margin: 0 auto;
-    width: 275px;
-    height: 315px;
-    border: 3px solid black;
+button {
+    font-size: 24px;
+}
+
+#container {
     display: flex;
-    flex-direction: column;
-    background-color: lightgray;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#calculator {
+    background-color: gray;
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(100px, auto)
+        repeat(5, 80px);
+    gap: 2px;
+    padding: 8px;
+    border: 4px solid black;
+    border-radius: 8px;
 }
 
 #display {
-    height: 4em;
-    margin: 0 10px;
+    grid-column: 1 / -1;
     background-color: white;
-    border: 2px ridge gray;
-    display: flex;
-    justify-content: flex-end;
-}
-
-#lower {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-#numbers {
-    width: 50%;
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-}
-
-#operators {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: flex-end;
+    font-size: 4em;
+    font-weight: initial;
+    margin: 4px 0;
+    border: 3px ridge black;
 }
 
-.display-text {
-    margin: auto 6px auto 0;
-    padding: 0;
-    font-weight: 500;
-    font-size: 36px;
-}
-
-.number {
-    width: 2em;
-    height: 2em;
-    font-size: 20px;
-}
-
-.operator {
-    margin: 0;
-    padding: 0;
-    width: 6em;
-    height: 2em;
-    font-size: 16px;
+#zero {
+    grid-column: 1 / 3;
 }
