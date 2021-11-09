@@ -1,54 +1,10 @@
-function add(f, s) {
-    return f + s;
-}
-
-function subtract(f, s) {
-    return f - s;
-}
-
-function multiply(f, s) {
-    return f * s;
-}
-
-function divide(f, s) {
-    return (f / s).toFixed(3);
-}
-
-function operate(op, num1, num2) {
-    switch(op) {
-        case 0:
-            return add(num1, num2);
-        case 1:
-            return subtract(num1, num2);
-        case 2:
-            return multiply(num1, num2);
-        case 3:
-            return divide(num1, num2);
-    }
-}
-
-function updateDisplay(currentNumber) {
-    if(first) {
-        display.textContent = currentNumber;
-    } else {
-        first = true;
-        display.textContent = currentNumber;
-    }
-}
-
-function clearDisplay() {
-    first = false;
-    display.textContent = 0;
-    currentNumber = 0;
-}
-
+const display = document.getElementById('display');
+const buttons = document.querySelectorAll('button');
 let first = false;
 let currentNumber = 0;
 let operator = 0;
 let num1 = 0;
 let num2 = 0;
-const display = document.getElementById('display');
-const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -91,3 +47,47 @@ buttons.forEach((button) => {
         }
     });
 });
+
+function updateDisplay(currentNumber) {
+    if(first) {
+        display.textContent = currentNumber;
+    } else {
+        first = true;
+        display.textContent = currentNumber;
+    }
+}
+
+function clearDisplay() {
+    first = false;
+    display.textContent = 0;
+    currentNumber = 0;
+}
+
+function add(f, s) {
+    return f + s;
+}
+
+function subtract(f, s) {
+    return f - s;
+}
+
+function multiply(f, s) {
+    return f * s;
+}
+
+function divide(f, s) {
+    return (f / s).toFixed(3);
+}
+
+function operate(op, num1, num2) {
+    switch(op) {
+        case 0:
+            return add(num1, num2);
+        case 1:
+            return subtract(num1, num2);
+        case 2:
+            return multiply(num1, num2);
+        case 3:
+            return divide(num1, num2);
+    }
+}
