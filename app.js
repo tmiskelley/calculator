@@ -1,66 +1,59 @@
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('button');
-let first = false;
-let currentNumber = 0;
-let operator = 0;
-let num1 = 0;
-let num2 = 0;
+let displayValue = null;
+let operator = null;
+let firstNumber = null;
+let secondNumber = null;
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
         if(button.id == 'clear') {
             clearDisplay();
-            currentNumber = 0;
         } else if(button.id == 'equals') {
-            num2 = currentNumber;
-            let ans = parseFloat(operate(operator, num1, num2));
-            updateDisplay(ans);
-            currentNumber = ans;
-        } else if(button.id == 'negative') {
-            currentNumber *= -1;
-            updateDisplay(currentNumber);
+            if(operator != null && firstNumber != null) {
+                calculate();
+                operator = null;
+            } else {
+                return;
+            }
         } else if(button.id == 'add') {
             operator = 0;
-            num1 = currentNumber;
-            currentNumber = 0;
-        } else if(button.id == 'minus') {
-            operator = 1;
-            num1 = currentNumber;
-            currentNumber = 0;
-        } else if(button.id == 'multiply') {
-            operator = 2;
-            num1 = currentNumber;
-            currentNumber = 0;
-        } else if(button.id == 'divide') {
-            operator = 3;
-            num1 = currentNumber;
-            currentNumber = 0;
-        } else if(button.id == 'percent') {
-            currentNumber /= 10;
-            updateDisplay(currentNumber);
-        } else if(first) {
-            currentNumber = (currentNumber * 10) + parseInt(button.id);
-            updateDisplay(currentNumber);
+            if(firstNumber === null) {
+                firstNumber = displayValue;
+                displayValue = null;
+            } else {
+                calculate();
+                firstNumber = displayValue;
+                displayValue = null;
+            }
+        } else if(displayValue === null) {
+            displayValue = parseInt(button.id)
+            updateDisplay(displayValue);
         } else {
-            currentNumber += parseInt(button.id);
-            updateDisplay(currentNumber);
+            displayValue = (displayValue * 10) + parseInt(button.id);
+            updateDisplay(displayValue);
         }
     });
 });
 
-function updateDisplay(currentNumber) {
-    if(first) {
-        display.textContent = currentNumber;
-    } else {
-        first = true;
-        display.textContent = currentNumber;
-    }
+function calculate() {
+    secondNumber = displayValue;
+    let result = operate(operator, firstNumber, secondNumber);
+    updateDisplay(result);
+    displayValue = result;
+    secondNumber = null;
+}
+
+function updateDisplay(displayValue) {
+    display.innerText = displayValue;
 }
 
 function clearDisplay() {
-    first = false;
-    display.textContent = 0;
-    currentNumber = 0;
+    display.innerText = 0;
+    displayValue = null;
+    operator = null;
+    firstNumber = null;
+    secondNumber = null;
 }
 
 function add(f, s) {
