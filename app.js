@@ -9,20 +9,61 @@ buttons.forEach((button) => {
     button.addEventListener('click', () => {
         if(button.id == 'clear') {
             clearDisplay();
+        } else if(button.id == 'negative') {
+            displayValue *= -1;
+            updateDisplay(displayValue);
+        } else if(button.id == 'percent') {
+            displayValue = parseFloat(displayValue / 100);
+            updateDisplay(displayValue);
         } else if(button.id == 'equals') {
             if(operator != null && firstNumber != null) {
                 calculate();
                 operator = null;
+                firstNumber = null;
             } else {
                 return;
             }
         } else if(button.id == 'add') {
-            operator = 0;
             if(firstNumber === null) {
+                operator = 0;
                 firstNumber = displayValue;
                 displayValue = null;
             } else {
                 calculate();
+                operator = 0;
+                firstNumber = displayValue;
+                displayValue = null;
+            }
+        } else if(button.id == 'minus') {
+            if(firstNumber === null) {
+                operator = 1;
+                firstNumber = displayValue;
+                displayValue = null;
+            } else {
+                calculate();
+                operator = 1;
+                firstNumber = displayValue;
+                displayValue = null;
+            }
+        } else if(button.id == 'multiply') {
+            if(firstNumber === null) {
+                operator = 2;
+                firstNumber = displayValue;
+                displayValue = null;
+            } else {
+                calculate();
+                operator = 2;
+                firstNumber = displayValue;
+                displayValue = null;
+            }
+        } else if(button.id == 'divide') {
+            if(firstNumber === null) {
+                operator = 3;
+                firstNumber = displayValue;
+                displayValue = null;
+            } else {
+                calculate();
+                operator = 3;
                 firstNumber = displayValue;
                 displayValue = null;
             }
@@ -69,7 +110,7 @@ function multiply(f, s) {
 }
 
 function divide(f, s) {
-    return (f / s).toFixed(3);
+    return parseFloat((f / s).toFixed(2));
 }
 
 function operate(op, num1, num2) {
