@@ -1,5 +1,15 @@
+body {
+    background: lightgray;
+}
+
 button {
     font-size: 24px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: rgb(215, 215, 215);
 }
 
 #container {
@@ -16,8 +26,8 @@ button {
     grid-template-rows: minmax(100px, auto)
         repeat(5, 80px);
     gap: 2px;
-    padding: 8px;
-    border: 4px solid black;
+    padding: 1.5em 1em;
+    border: 5px solid black;
     border-radius: 8px;
 }
 
